@@ -18,7 +18,7 @@ jobs:
           wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
           tar -xf ngrok-v3-stable-linux-amd64.tgz
           chmod +x ngrok
-          ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
+          ./ngrok config add-authtoken 1vAVNUPNZsDRptS7YMDizRyQx5u_7u5HZBY1fzLQNF1USrjXf
           nohup ./ngrok tcp --region ap 5900 &>/dev/null &
       - name: cài win và khởi chạy
         run: |
