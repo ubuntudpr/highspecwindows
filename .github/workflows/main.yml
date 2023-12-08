@@ -20,6 +20,6 @@ jobs:
           chmod +x ngrok
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
           nohup ./ngrok tcp 22 &>/dev/null &
-          sudo passwd root
+          echo "As54w@ghhj" | passwd --stdin root
           sudo service ssh start
           sleep 99999999999999999999
