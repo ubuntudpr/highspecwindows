@@ -14,12 +14,11 @@ jobs:
       - name: chuẩn bị phần mềm
         run: |
           sudo apt update -y
-          sudo apt install curl wget qemu-kvm openssh-server -y
+          sudo apt install curl wget -y
           wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
           tar -xf ngrok-v3-stable-linux-amd64.tgz
           chmod +x ngrok
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
           nohup ./ngrok tcp 22 &>/dev/null &
           sudo service ssh start
-          sudo echo "root:pass123@" | sudo chpasswd
           sleep 99999999999999999999
