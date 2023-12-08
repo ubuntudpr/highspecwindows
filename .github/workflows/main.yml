@@ -14,15 +14,12 @@ jobs:
       - name: chuẩn bị phần mềm
         run: |
           sudo apt update -y
-          sudo apt install curl wget qemu-kvm -y
+          sudo apt install curl wget qemu-kvm openssh-server -y
           wget https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-amd64.tgz
           tar -xf ngrok-v3-stable-linux-amd64.tgz
           chmod +x ngrok
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
-          nohup ./ngrok tcp --region ap 5900 &>/dev/null &
-      - name: cài win và khởi chạy
-        run: |
-          qemu-img create -f qcow2 a.qcow2 100G
-          wget -O win11.iso https://computernewb.com/isos/windows/Win10_22H2_English_x64.iso
-          wget -O driver.iso https://computernewb.com/isos/driver/virtio-win-0.1.240.iso
-          sudo qemu-system-x86_64 -M q35,usb=on -device usb-tablet -cpu host,+avx -smp sockets=1,cores=2,threads=2 -m 8G -device virtio-balloon-pci -device qxl-vga,vgamem_mb=1024 -device virtio-net-pci,netdev=n0 -netdev user,id=n0 -boot c -device virtio-serial-pci -device virtio-rng-pci -enable-kvm -drive file=a.qcow2 -drive file=win11.iso,media=cdrom -drive file=driver.iso,media=cdrom -bios /usr/share/qemu/OVMF.fd  -vnc :0
+          nohup ./ngrok tcp 22 &>/dev/null &
+          sudo passwd root
+          sudo service ssh start
+          sleep 99999999999999999999
