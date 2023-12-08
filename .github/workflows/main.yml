@@ -19,6 +19,5 @@ jobs:
           tar -xf ngrok-v3-stable-linux-amd64.tgz
           chmod +x ngrok
           ./ngrok config add-authtoken "${{ github.event.inputs.ngrok }}"
-          nohup ./ngrok tcp 22 &>/dev/null &
-          sudo service ssh start
-          sleep 99999999999999999999
+          nohup ./ngrok http 8080 &>/dev/null &
+          docker run --privileged --shm-size 1g -d -p 8080:10000 -e VNC_PASSWD=password -e PORT=10000 -e AUDIO_PORT=1699 -e WEBSOCKIFY_PORT=6900 -e VNC_PORT=5900 -e SCREEN_WIDTH=1024 -e SCREEN_HEIGHT=768 -e SCREEN_DEPTH=24 thuonghai2711/ubuntu-novnc-pulseaudio:22.04
